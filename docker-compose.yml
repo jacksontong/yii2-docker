@@ -8,6 +8,7 @@ services:
     build: docker/nginx
     ports:
       - "9090:80"
+      - "443:443"
     volumes_from:
       - application
     depends_on:
@@ -16,3 +17,20 @@ services:
     build: docker/php
     volumes_from:
       - application
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    depends_on:
+      - mysql
+  mysql:
+    build: docker/mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - /var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
