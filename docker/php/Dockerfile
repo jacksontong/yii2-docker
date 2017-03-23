@@ -1,5 +1,6 @@
 FROM php:7.1.3-fpm
 
+MAINTAINER Jackson Tong <tongtoan2704@gmail.com>
 WORKDIR /var/www/web
 
 COPY . /var/www
