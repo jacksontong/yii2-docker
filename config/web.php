@@ -1,6 +1,7 @@
 <?php
 
 $params = require(__DIR__ . '/params.php');
+$mongodb = require(__DIR__ . '/mongodb.php');
 
 $config = [
     'id' => 'basic',
@@ -38,6 +39,7 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'mongodb' => $mongodb,
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

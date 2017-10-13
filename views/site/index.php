@@ -3,6 +3,14 @@
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
+//todo: remove dump data
+//Yii::$app->db->open();
+//todo: remove dump data
+//\yii\helpers\VarDumper::dump(Yii::$app->db->isActive,10,1);
+Yii::$app->mongodb->open();
+////todo: remove dump data
+\yii\helpers\VarDumper::dump(Yii::$app->mongodb,10,1);
+\yii\helpers\VarDumper::dump(Yii::$app->mongodb->isActive,10,1);
 ?>
 <div class="site-index">
 

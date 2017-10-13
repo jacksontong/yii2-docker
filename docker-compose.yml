@@ -16,6 +16,8 @@ services:
       - VIRTUAL_HOST=${VIRTUAL_HOST}
   php-fpm:
     build: docker/php
+    volumes:
+      - ~/.composer:/root/.composer
     volumes_from:
       - application
     environment:
@@ -24,13 +26,22 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     depends_on:
       - mysql
-  nginx-proxy:
-    image: jwilder/nginx-proxy
-    container_name: nginx-proxy
+      - mongo
+#  nginx-proxy:
+#    image: jwilder/nginx-proxy
+#    container_name: nginx-proxy
+#    ports:
+#      - "80:80"
+#    volumes:
+#      - /var/run/docker.sock:/tmp/docker.sock:ro
+  mongo:
+    image: mongo:3.2-jessie
     ports:
-      - "80:80"
+      - "27017:27017"
+    expose:
+      - "27017"
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /data/db
   mysql:
     build: docker/mysql
     ports:
